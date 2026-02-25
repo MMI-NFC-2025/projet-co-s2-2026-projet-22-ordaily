@@ -16,7 +16,7 @@
 
 | Étudiants    | Prénom NOM  |
 | :----------- | :---------- |
-| Étudiant 1   | à compléter |
-| Étudiant 2   | à compléter |
-| Étudiant 3   | à compléter |
+| Étudiant 1   | Nathan BATISTA BALANCHE |
+| Étudiant 2   | Mathis DESRACHES |
+| Étudiant 3   | Mathis MICHEL |
 | (Étudiant 4) | à compléter |
