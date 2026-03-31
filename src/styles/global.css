@@ -1,0 +1,27 @@
+@font-face {
+  font-family: 'Manrope';
+  src: url('/fonts/Manrope-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('/fonts/PlusJakartaSans-Regular.ttf') format('truetype');
+}
+
+@theme {
+  --color-jum-yellow: oklch(0.86 0.17 95.4);
+  --color-jum-red: oklch(0.71 0.19 23.4);
+  --color-jum-blue: oklch(0.63 0.09 243.3);
+}
+
+/* Puis Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Force la police */
+.font-manrope {
+  font-family: 'Manrope', cursive !important;
+}
+.font-plus-jakarta-sans {
+  font-family: 'Plus Jakarta Sans', cursive !important;
+}
