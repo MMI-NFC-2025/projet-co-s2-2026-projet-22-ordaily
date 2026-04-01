@@ -1,3 +1,8 @@
+/* Puis Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
   font-family: 'Manrope';
   src: url('/fonts/Manrope-Regular.ttf') format('truetype');
@@ -8,15 +13,18 @@
 }
 
 @theme {
-  --color-jum-yellow: oklch(0.86 0.17 95.4);
-  --color-jum-red: oklch(0.71 0.19 23.4);
-  --color-jum-blue: oklch(0.63 0.09 243.3);
-}
+  --color-nebula-blue-1: #0066FF;
+  --color-nebula-blue-2: #8FA0FF;
 
-/* Puis Tailwind */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+  --color-ember-orange-1: #FF9F1C;
+  --color-ember-orange-2: #FFC857;
+
+  --color-void-black: #2A2A2A;
+  --color-pure-white: #FAF7F2;
+
+  --gradient-blue: linear-gradient(90deg, #0066FF, #8FA0FF);
+  --gradient-orange: linear-gradient(90deg, #FF9F1C, #FFC857);
+}
 
 /* Force la police */
 .font-manrope {
