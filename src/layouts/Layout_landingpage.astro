@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import Header from '../components/Header.astro';
+import Header from '../components/Header_landingpage.astro';
 const { titre } = Astro.props;
 ---
 
@@ -13,7 +13,7 @@ const { titre } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{titre}</title>
 	</head>
-	<body>
+	<body class="bg-red-500">
 		<Header />
 			<slot />
 	</body>
