@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import Header from '../components/Header_landingpage.astro';
-
+import Footer from '../components/Footer.astro'
 const { titre } = Astro.props;
 ---
 
@@ -30,5 +30,6 @@ const { titre } = Astro.props;
     <main class="relative z-10">
       <slot />
     </main>
+	<Footer />
   </body>
 </html>
