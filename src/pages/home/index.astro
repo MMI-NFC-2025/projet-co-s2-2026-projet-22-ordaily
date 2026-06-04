@@ -9,7 +9,7 @@ import Layout from '../../layouts/Layout.astro';
     <h1 id="greeting" class="font-plus-jakarta-sans text-2xl font-bold text-[var(--color-void-black)]">
       Bonjour !
     </h1>
-    <span id="progression" class="rounded-full bg-[#F5A623] px-5 py-2 font-manrope text-sm font-semibold text-white">
+    <span id="progression" class="rounded-full bg-[#F5A623] px-5 py-2 font-manrope text-sm font-semibold text-white" aria-label="Progression globale">
       Progression 0%
     </span>
   </div>
@@ -17,10 +17,10 @@ import Layout from '../../layouts/Layout.astro';
   <!-- Card Quiz journalier -->
   <div class="px-6 pt-8">
     <h2 class="font-plus-jakarta-sans text-lg font-bold text-[var(--color-void-black)] mb-4">Quiz journalier</h2>
-    <a id="quiz-card" href="/home/quiz" class="block rounded-2xl border border-[var(--color-nebula-blue-1)]/30 bg-white px-5 py-4 hover:border-[var(--color-nebula-blue-1)] transition-colors">
+    <a id="quiz-card" href="/home/quiz" aria-label="Accéder au quiz journalier" class="block rounded-2xl border border-[var(--color-nebula-blue-1)]/30 bg-white px-5 py-4 hover:border-[var(--color-nebula-blue-1)] transition-colors">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-3">
-          <img src="/icons/brain_icon.svg" alt="Logement" class="w-8 h-8" />
+          <img src="/icons/brain_icon.svg" alt="Icône quiz" class="w-8 h-8" />
           <div>
             <p class="font-plus-jakarta-sans text-sm font-bold text-[var(--color-void-black)]">Quiz journalier</p>
             <p id="quiz-statut" class="font-manrope text-xs text-[var(--color-void-black)]/50 mt-0.5">Chargement...</p>
@@ -40,71 +40,71 @@ import Layout from '../../layouts/Layout.astro';
     <div class="flex flex-col gap-3">
 
       <!-- Logement -->
-      <a href="/home/logement" class="rounded-2xl border border-[var(--color-void-black)]/10 bg-white px-5 py-4 hover:border-[var(--color-nebula-blue-1)] transition-colors">
+      <a href="/home/logement" aria-label="Parcours Logement" class="rounded-2xl border border-[var(--color-void-black)]/10 bg-white px-5 py-4 hover:border-[var(--color-nebula-blue-1)] transition-colors">
         <div class="flex items-center justify-between mb-3">
           <div class="flex items-center gap-2">
-            <img src="/icons/logement_icon.svg" alt="Logement" class="w-8 h-8" />
+            <img src="/icons/logement_icon.svg" alt="Icône logement" class="w-8 h-8" />
             <span class="font-plus-jakarta-sans text-sm font-bold text-[var(--color-void-black)]">Logement</span>
           </div>
           <span id="pct-logement" class="rounded-full bg-[var(--color-void-black)] px-3 py-1 font-manrope text-xs font-semibold text-white">0%</span>
         </div>
-        <div class="h-1.5 w-full rounded-full bg-[var(--color-void-black)]/10">
+        <div class="h-1.5 w-full rounded-full bg-[var(--color-void-black)]/10" role="progressbar" aria-label="Progression logement">
           <div id="bar-logement" class="h-1.5 rounded-full bg-[var(--color-nebula-blue-1)] transition-all" style="width: 0%"></div>
         </div>
       </a>
 
       <!-- Budget -->
-      <a href="/home/budget" class="rounded-2xl border border-[var(--color-void-black)]/10 bg-white px-5 py-4 hover:border-[var(--color-nebula-blue-1)] transition-colors">
+      <a href="/home/budget" aria-label="Parcours Budget" class="rounded-2xl border border-[var(--color-void-black)]/10 bg-white px-5 py-4 hover:border-[var(--color-nebula-blue-1)] transition-colors">
         <div class="flex items-center justify-between mb-3">
           <div class="flex items-center gap-2">
-            <img src="/icons/budget_icon.svg" alt="Budget" class="w-8 h-8" />
+            <img src="/icons/budget_icon.svg" alt="Icône budget" class="w-8 h-8" />
             <span class="font-plus-jakarta-sans text-sm font-bold text-[var(--color-void-black)]">Budget</span>
           </div>
           <span id="pct-budget" class="rounded-full bg-[var(--color-void-black)] px-3 py-1 font-manrope text-xs font-semibold text-white">0%</span>
         </div>
-        <div class="h-1.5 w-full rounded-full bg-[var(--color-void-black)]/10">
+        <div class="h-1.5 w-full rounded-full bg-[var(--color-void-black)]/10" role="progressbar" aria-label="Progression budget">
           <div id="bar-budget" class="h-1.5 rounded-full bg-[var(--color-nebula-blue-1)] transition-all" style="width: 0%"></div>
         </div>
       </a>
 
       <!-- Administration -->
-      <a href="/home/administration" class="rounded-2xl border border-[var(--color-void-black)]/10 bg-white px-5 py-4 hover:border-[var(--color-nebula-blue-1)] transition-colors">
+      <a href="/home/administration" aria-label="Parcours Administration" class="rounded-2xl border border-[var(--color-void-black)]/10 bg-white px-5 py-4 hover:border-[var(--color-nebula-blue-1)] transition-colors">
         <div class="flex items-center justify-between mb-3">
           <div class="flex items-center gap-2">
-            <img src="/icons/administration_icon.svg" alt="Administration" class="w-8 h-8" />
+            <img src="/icons/administration_icon.svg" alt="Icône administration" class="w-8 h-8" />
             <span class="font-plus-jakarta-sans text-sm font-bold text-[var(--color-void-black)]">Administration</span>
           </div>
           <span id="pct-administration" class="rounded-full bg-[var(--color-void-black)] px-3 py-1 font-manrope text-xs font-semibold text-white">0%</span>
         </div>
-        <div class="h-1.5 w-full rounded-full bg-[var(--color-void-black)]/10">
+        <div class="h-1.5 w-full rounded-full bg-[var(--color-void-black)]/10" role="progressbar" aria-label="Progression administration">
           <div id="bar-administration" class="h-1.5 rounded-full bg-[var(--color-nebula-blue-1)] transition-all" style="width: 0%"></div>
         </div>
       </a>
 
       <!-- Organisation -->
-      <a href="/home/organisation" class="rounded-2xl border border-[var(--color-void-black)]/10 bg-white px-5 py-4 hover:border-[var(--color-nebula-blue-1)] transition-colors">
+      <a href="/home/organisation" aria-label="Parcours Organisation" class="rounded-2xl border border-[var(--color-void-black)]/10 bg-white px-5 py-4 hover:border-[var(--color-nebula-blue-1)] transition-colors">
         <div class="flex items-center justify-between mb-3">
           <div class="flex items-center gap-2">
-            <img src="/icons/organisation_icon.svg" alt="Organisation" class="w-8 h-8" />
+            <img src="/icons/organisation_icon.svg" alt="Icône organisation" class="w-8 h-8" />
             <span class="font-plus-jakarta-sans text-sm font-bold text-[var(--color-void-black)]">Organisation</span>
           </div>
           <span id="pct-organisation" class="rounded-full bg-[var(--color-void-black)] px-3 py-1 font-manrope text-xs font-semibold text-white">0%</span>
         </div>
-        <div class="h-1.5 w-full rounded-full bg-[var(--color-void-black)]/10">
+        <div class="h-1.5 w-full rounded-full bg-[var(--color-void-black)]/10" role="progressbar" aria-label="Progression organisation">
           <div id="bar-organisation" class="h-1.5 rounded-full bg-[var(--color-nebula-blue-1)] transition-all" style="width: 0%"></div>
         </div>
       </a>
 
       <!-- Santé -->
-      <a href="/home/sante" class="rounded-2xl border border-[var(--color-void-black)]/10 bg-white px-5 py-4 hover:border-[var(--color-nebula-blue-1)] transition-colors">
+      <a href="/home/sante" aria-label="Parcours Santé" class="rounded-2xl border border-[var(--color-void-black)]/10 bg-white px-5 py-4 hover:border-[var(--color-nebula-blue-1)] transition-colors">
         <div class="flex items-center justify-between mb-3">
           <div class="flex items-center gap-2">
-            <img src="/icons/sante_icon.svg" alt="Santé" class="w-8 h-8" />
+            <img src="/icons/sante_icon.svg" alt="Icône santé" class="w-8 h-8" />
             <span class="font-plus-jakarta-sans text-sm font-bold text-[var(--color-void-black)]">Santé</span>
           </div>
           <span id="pct-sante" class="rounded-full bg-[var(--color-void-black)] px-3 py-1 font-manrope text-xs font-semibold text-white">0%</span>
         </div>
-        <div class="h-1.5 w-full rounded-full bg-[var(--color-void-black)]/10">
+        <div class="h-1.5 w-full rounded-full bg-[var(--color-void-black)]/10" role="progressbar" aria-label="Progression santé">
           <div id="bar-sante" class="h-1.5 rounded-full bg-[var(--color-nebula-blue-1)] transition-all" style="width: 0%"></div>
         </div>
       </a>
@@ -127,7 +127,7 @@ import Layout from '../../layouts/Layout.astro';
 
   const user = pb.authStore.record;
 
-  document.getElementById('greeting').textContent = `Bonjour ${user.prenom} !`; // ← ajout
+  document.getElementById('greeting').textContent = `Bonjour ${user.prenom} !`;
 
   const total =
     (user.avancee_logement      ?? 0) +
@@ -163,7 +163,6 @@ import Layout from '../../layouts/Layout.astro';
 
   const dejaFait = participation && participation.derniere_participation.startsWith(aujourd_hui);
 
-  // Prochain reroll à 6h le lendemain
   const maintenant = new Date();
   const prochainReroll = new Date();
   prochainReroll.setDate(maintenant.getDate() + 1);

@@ -6,12 +6,11 @@ import Layout from '../layouts/Layout_without_wave.astro';
 
   <div class="px-6 pt-10 mb-16">
 
-    <!-- Titre + illustration -->
-    <h1 class="font-plus-jakarta-sans text-2xl font-bold text-[var(--color-void-black)] mb-8">Mes parcours</h1>
+    <h1 class="font-plus-jakarta-sans text-2xl font-bold text-[var(--color-void-black)] mb-8">À propos</h1>
 
     <!-- Le projet -->
-    <section class="mb-10">
-      <h2 class="font-plus-jakarta-sans text-xl font-bold text-[var(--color-void-black)] mb-4">Le projet</h2>
+    <section class="mb-10" aria-labelledby="titre-projet">
+      <h2 id="titre-projet" class="font-plus-jakarta-sans text-xl font-bold text-[var(--color-void-black)] mb-4">Le projet</h2>
       <div class="flex flex-col gap-4 font-manrope text-sm text-[var(--color-void-black)]/70 leading-relaxed">
         <p>Entrer dans la vie adulte implique de nombreuses démarches : logement, budget, santé ou organisation du quotidien.</p>
         <p>Face à ces nouvelles responsabilités, il n'est pas toujours simple de savoir par où commencer. <span class="font-bold text-[var(--color-nebula-blue-1)]">OrDaily</span> est né de ce constat.</p>
@@ -20,8 +19,8 @@ import Layout from '../layouts/Layout_without_wave.astro';
     </section>
 
     <!-- Notre mission -->
-    <section class="mb-10">
-      <h2 class="font-plus-jakarta-sans text-xl font-bold text-[var(--color-void-black)] mb-4">Notre mission</h2>
+    <section class="mb-10" aria-labelledby="titre-mission">
+      <h2 id="titre-mission" class="font-plus-jakarta-sans text-xl font-bold text-[var(--color-void-black)] mb-4">Notre mission</h2>
       <div class="flex flex-col gap-4 font-manrope text-sm text-[var(--color-void-black)]/70 leading-relaxed">
         <p>Aider les jeunes adultes à s'orienter face à leurs premières responsabilités, en leur apportant des repères clairs et accessibles.</p>
         <p><span class="font-bold text-[var(--color-nebula-blue-1)]">OrDaily</span> ne cherche pas à simplifier à l'extrême, mais à rendre les choses compréhensibles et structurées.</p>
@@ -29,9 +28,9 @@ import Layout from '../layouts/Layout_without_wave.astro';
     </section>
 
     <!-- Notre approche -->
-    <section class="mb-10">
-      <h2 class="font-plus-jakarta-sans text-xl font-bold text-[var(--color-void-black)] mb-4">Notre approche</h2>
-      <ul class="flex flex-col gap-2 font-manrope text-sm text-[var(--color-void-black)]/70 leading-relaxed list-disc list-inside">
+    <section class="mb-10" aria-labelledby="titre-approche">
+      <h2 id="titre-approche" class="font-plus-jakarta-sans text-xl font-bold text-[var(--color-void-black)] mb-4">Notre approche</h2>
+      <ul class="flex flex-col gap-2 font-manrope text-sm text-[var(--color-void-black)]/70 leading-relaxed list-disc list-inside" aria-label="Principes de notre approche">
         <li>des informations claires et accessibles</li>
         <li>une progression par étapes</li>
         <li>une expérience simple et sans surcharge</li>
@@ -40,27 +39,27 @@ import Layout from '../layouts/Layout_without_wave.astro';
     </section>
 
     <!-- Positionnement -->
-    <section class="mb-10">
-      <h2 class="font-plus-jakarta-sans text-xl font-bold text-[var(--color-void-black)] mb-4">Positionnement</h2>
+    <section class="mb-10" aria-labelledby="titre-positionnement">
+      <h2 id="titre-positionnement" class="font-plus-jakarta-sans text-xl font-bold text-[var(--color-void-black)] mb-4">Positionnement</h2>
       <div class="flex flex-col gap-4 font-manrope text-sm text-[var(--color-void-black)]/70 leading-relaxed">
         <p><span class="font-bold text-[var(--color-nebula-blue-1)]">OrDaily</span> ne remplace pas les services institutionnels. L'application agit comme un intermédiaire qui aide à comprendre et organiser les démarches existantes.</p>
       </div>
     </section>
 
     <!-- Fiabilité des informations -->
-    <section class="mb-10">
-      <h2 class="font-plus-jakarta-sans text-xl font-bold text-[var(--color-void-black)] mb-4">Fiabilité des informations</h2>
+    <section class="mb-10" aria-labelledby="titre-fiabilite">
+      <h2 id="titre-fiabilite" class="font-plus-jakarta-sans text-xl font-bold text-[var(--color-void-black)] mb-4">Fiabilité des informations</h2>
       <div class="flex flex-col gap-4 font-manrope text-sm text-[var(--color-void-black)]/70 leading-relaxed">
         <p>Les contenus proposés s'appuient sur des sources institutionnelles et fiables. Ils sont reformulés pour être plus lisibles et compréhensibles.</p>
       </div>
     </section>
 
     <!-- Numérique responsable -->
-    <section class="mb-10">
-      <h2 class="font-plus-jakarta-sans text-xl font-bold text-[var(--color-void-black)] mb-4">Numérique responsable</h2>
+    <section class="mb-10" aria-labelledby="titre-numerique">
+      <h2 id="titre-numerique" class="font-plus-jakarta-sans text-xl font-bold text-[var(--color-void-black)] mb-4">Numérique responsable</h2>
       <div class="flex flex-col gap-4 font-manrope text-sm text-[var(--color-void-black)]/70 leading-relaxed">
         <p><span class="font-bold text-[var(--color-nebula-blue-1)]">OrDaily</span> privilégie une approche simple et utile :</p>
-        <ul class="flex flex-col gap-2 list-disc list-inside">
+        <ul class="flex flex-col gap-2 list-disc list-inside" aria-label="Principes du numérique responsable">
           <li>fonctionnalités limitées mais pertinentes</li>
           <li>navigation claire</li>
           <li>réduction de la surcharge d'information</li>
@@ -69,8 +68,8 @@ import Layout from '../layouts/Layout_without_wave.astro';
     </section>
 
     <!-- L'équipe -->
-    <section class="mb-10">
-      <h2 class="font-plus-jakarta-sans text-xl font-bold text-[var(--color-void-black)] mb-4">L'équipe</h2>
+    <section class="mb-10" aria-labelledby="titre-equipe">
+      <h2 id="titre-equipe" class="font-plus-jakarta-sans text-xl font-bold text-[var(--color-void-black)] mb-4">L'équipe</h2>
       <div class="flex flex-col gap-4 font-manrope text-sm text-[var(--color-void-black)]/70 leading-relaxed">
         <p>Nous sommes une équipe de trois étudiants réunis autour d'un même objectif : concevoir un projet utile et accessible pour accompagner les jeunes dans leurs premières démarches vers la vie autonome.</p>
       </div>

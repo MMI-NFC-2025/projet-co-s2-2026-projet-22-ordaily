@@ -9,7 +9,7 @@ import Layout from '../../layouts/Layout.astro';
     <!-- Titre + illustration -->
     <div class="relative mb-10 overflow-hidden">
       <h1 class="font-plus-jakarta-sans text-2xl font-bold text-[var(--color-void-black)]">Mon espace</h1>
-      <div class="absolute -top-4 -right-10 w-48 h-48 opacity-30 pointer-events-none">
+      <div class="absolute -top-4 -right-10 w-48 h-48 opacity-30 pointer-events-none" aria-hidden="true">
         <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M10 100 Q60 20 110 100 Q160 180 200 100" stroke="#4F6EF7" stroke-width="8" fill="none" stroke-linecap="round"/>
           <path d="M0 120 Q50 40 100 120 Q150 200 200 120" stroke="#4F6EF7" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.5"/>
@@ -18,34 +18,38 @@ import Layout from '../../layouts/Layout.astro';
     </div>
 
     <!-- Informations utilisateur -->
-    <section class="mb-8">
-      <h2 class="font-plus-jakarta-sans text-lg font-bold text-[var(--color-void-black)] mb-3">Informations utilisateur</h2>
-      <div class="rounded-2xl border border-gray-200 bg-white px-5 py-4">
-        <p id="nom-complet" class="font-plus-jakarta-sans text-base font-bold text-[var(--color-void-black)]">—</p>
-        <p id="email-user" class="font-manrope text-sm text-[var(--color-void-black)]/50 mt-1">—</p>
+    <section class="mb-8" aria-labelledby="titre-infos">
+      <h2 id="titre-infos" class="font-plus-jakarta-sans text-lg font-bold text-[var(--color-void-black)] mb-3">Informations utilisateur</h2>
+      <div class="rounded-2xl border border-gray-200 bg-white px-5 py-4" role="region" aria-label="Nom et email de l'utilisateur">
+        <p id="nom-complet" class="font-plus-jakarta-sans text-base font-bold text-[var(--color-void-black)]" aria-label="Nom complet">—</p>
+        <p id="email-user" class="font-manrope text-sm text-[var(--color-void-black)]/50 mt-1" aria-label="Adresse email">—</p>
       </div>
     </section>
 
     <!-- Paramètres -->
-    <section class="mb-8">
-      <h2 class="font-plus-jakarta-sans text-lg font-bold text-[var(--color-void-black)] mb-3">Paramètres</h2>
+    <section class="mb-8" aria-labelledby="titre-parametres">
+      <h2 id="titre-parametres" class="font-plus-jakarta-sans text-lg font-bold text-[var(--color-void-black)] mb-3">Paramètres</h2>
       <div class="flex flex-wrap gap-2">
-        <a href="/home/edit" class="rounded-lg border border-gray-200 bg-white px-4 py-2 font-manrope text-sm text-[var(--color-void-black)] hover:border-blue-400 transition-colors">
+        <a href="/home/edit" aria-label="Modifier mes informations personnelles" class="rounded-lg border border-gray-200 bg-white px-4 py-2 font-manrope text-sm text-[var(--color-void-black)] hover:border-blue-400 transition-colors">
           Modifier mes informations
         </a>
       </div>
     </section>
 
     <!-- Actions -->
-    <div class="flex flex-col gap-3 mt-10">
+    <div class="flex flex-col gap-3 mt-10" role="group" aria-label="Actions du compte">
       <button
         id="btn-deconnexion"
+        type="button"
+        aria-label="Se déconnecter de mon compte OrDaily"
         class="w-full rounded-full bg-[#F5A623] px-6 py-3.5 font-plus-jakarta-sans text-sm font-bold uppercase tracking-widest text-white hover:opacity-80 transition-opacity"
       >
         Se déconnecter
       </button>
       <button
         id="btn-supprimer"
+        type="button"
+        aria-label="Supprimer définitivement mon compte OrDaily"
         class="w-full rounded-full border border-red-300 bg-white px-6 py-3.5 font-plus-jakarta-sans text-sm font-bold uppercase tracking-widest text-red-400 hover:bg-red-50 transition-colors"
       >
         Supprimer le compte
@@ -69,8 +73,13 @@ import Layout from '../../layouts/Layout.astro';
 
   const user = pb.authStore.record;
 
-  document.getElementById('nom-complet').textContent = `${user.prenom ?? ''} ${user.nom ?? ''}`.trim();
-  document.getElementById('email-user').textContent = user.email ?? '';
+  const nomComplet = `${user.prenom ?? ''} ${user.nom ?? ''}`.trim();
+  document.getElementById('nom-complet').textContent = nomComplet;
+  document.getElementById('nom-complet').setAttribute('aria-label', `Nom complet : ${nomComplet}`);
+
+  const email = user.email ?? '';
+  document.getElementById('email-user').textContent = email;
+  document.getElementById('email-user').setAttribute('aria-label', `Adresse email : ${email}`);
 
   // Déconnexion
   document.getElementById('btn-deconnexion').addEventListener('click', () => {

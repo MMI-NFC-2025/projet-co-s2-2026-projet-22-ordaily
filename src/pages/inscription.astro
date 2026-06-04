@@ -8,60 +8,85 @@ import Layout from '../layouts/Layout_loginpage.astro';
     <div class="w-full max-w-sm">
 
       <!-- Tabs -->
-      <div class="flex mb-10">
-        <a href="/inscription" class="flex-1 text-center pb-3 font-plus-jakarta-sans text-sm font-bold uppercase tracking-widest text-[var(--color-nebula-blue-1)] border-b-2 border-[var(--color-nebula-blue-1)]">
-          Inscription
-        </a>
-        <a href="/connexion" class="flex-1 text-center pb-3 font-plus-jakarta-sans text-sm font-bold uppercase tracking-widest text-[var(--color-void-black)] border-b-2 border-transparent hover:border-[var(--color-void-black)] transition-colors">
-          Connexion
-        </a>
-      </div>
+      <nav aria-label="Navigation inscription et connexion">
+        <div class="flex mb-10" role="tablist">
+          <a href="/inscription" role="tab" aria-selected="true" aria-current="page" class="flex-1 text-center pb-3 font-plus-jakarta-sans text-sm font-bold uppercase tracking-widest text-[var(--color-nebula-blue-1)] border-b-2 border-[var(--color-nebula-blue-1)]">
+            Inscription
+          </a>
+          <a href="/connexion" role="tab" aria-selected="false" class="flex-1 text-center pb-3 font-plus-jakarta-sans text-sm font-bold uppercase tracking-widest text-[var(--color-void-black)] border-b-2 border-transparent hover:border-[var(--color-void-black)] transition-colors">
+            Connexion
+          </a>
+        </div>
+      </nav>
 
       <!-- Fields -->
-      <div class="flex flex-col gap-4">
+      <form class="flex flex-col gap-4" aria-label="Formulaire d'inscription" onsubmit="return false;">
+
+        <label for="prenom" class="sr-only">Prénom</label>
         <input
           id="prenom"
           type="text"
           placeholder="Prénom"
+          autocomplete="given-name"
+          aria-required="true"
           class="w-full rounded-full border border-[var(--color-void-black)]/20 bg-[var(--color-pure-white)] px-5 py-3.5 font-manrope text-sm text-[var(--color-void-black)] placeholder:text-[var(--color-void-black)]/40 outline-none focus:border-[var(--color-nebula-blue-1)] transition-colors"
         />
+
+        <label for="nom" class="sr-only">Nom</label>
         <input
           id="nom"
           type="text"
           placeholder="Nom"
+          autocomplete="family-name"
+          aria-required="true"
           class="w-full rounded-full border border-[var(--color-void-black)]/20 bg-[var(--color-pure-white)] px-5 py-3.5 font-manrope text-sm text-[var(--color-void-black)] placeholder:text-[var(--color-void-black)]/40 outline-none focus:border-[var(--color-nebula-blue-1)] transition-colors"
         />
+
+        <label for="email" class="sr-only">Adresse e-mail</label>
         <input
           id="email"
           type="email"
           placeholder="Mail"
+          autocomplete="email"
+          aria-required="true"
           class="w-full rounded-full border border-[var(--color-void-black)]/20 bg-[var(--color-pure-white)] px-5 py-3.5 font-manrope text-sm text-[var(--color-void-black)] placeholder:text-[var(--color-void-black)]/40 outline-none focus:border-[var(--color-nebula-blue-1)] transition-colors"
         />
+
+        <label for="password" class="sr-only">Mot de passe</label>
         <input
           id="password"
           type="password"
           placeholder="Mot de passe"
+          autocomplete="new-password"
+          aria-required="true"
           class="w-full rounded-full border border-[var(--color-void-black)]/20 bg-[var(--color-pure-white)] px-5 py-3.5 font-manrope text-sm text-[var(--color-void-black)] placeholder:text-[var(--color-void-black)]/40 outline-none focus:border-[var(--color-nebula-blue-1)] transition-colors"
         />
+
+        <label for="password-confirm" class="sr-only">Confirmation du mot de passe</label>
         <input
           id="password-confirm"
           type="password"
           placeholder="Confirmation du mot de passe"
+          autocomplete="new-password"
+          aria-required="true"
           class="w-full rounded-full border border-[var(--color-void-black)]/20 bg-[var(--color-pure-white)] px-5 py-3.5 font-manrope text-sm text-[var(--color-void-black)] placeholder:text-[var(--color-void-black)]/40 outline-none focus:border-[var(--color-nebula-blue-1)] transition-colors"
         />
-        <p id="error-msg" class="hidden text-center text-sm text-red-500 font-manrope"></p>
-      </div>
 
-      <!-- Submit -->
-      <div class="mt-10 flex justify-center">
-        <button
-          id="btn-inscription"
-          type="button"
-          class="rounded-full bg-[var(--color-void-black)] px-12 py-3.5 font-plus-jakarta-sans text-sm font-bold uppercase tracking-widest text-[var(--color-pure-white)] hover:opacity-80 transition-opacity disabled:opacity-40"
-        >
-          Inscription
-        </button>
-      </div>
+        <p id="error-msg" class="hidden text-center text-sm text-red-500 font-manrope" role="alert" aria-live="assertive"></p>
+
+        <!-- Submit -->
+        <div class="mt-10 flex justify-center">
+          <button
+            id="btn-inscription"
+            type="submit"
+            aria-label="Créer mon compte OrDaily"
+            class="rounded-full bg-[var(--color-void-black)] px-12 py-3.5 font-plus-jakarta-sans text-sm font-bold uppercase tracking-widest text-[var(--color-pure-white)] hover:opacity-80 transition-opacity disabled:opacity-40"
+          >
+            Inscription
+          </button>
+        </div>
+
+      </form>
 
     </div>
   </div>
@@ -75,6 +100,18 @@ import Layout from '../layouts/Layout_loginpage.astro';
 
   const btn = document.getElementById('btn-inscription');
   const errorMsg = document.getElementById('error-msg');
+  const inputs = ['prenom', 'nom', 'email', 'password', 'password-confirm'];
+
+  function clearErrors() {
+    inputs.forEach(id => document.getElementById(id).removeAttribute('aria-invalid'));
+    errorMsg.classList.add('hidden');
+  }
+
+  function setError(msg, invalidIds = []) {
+    errorMsg.textContent = msg;
+    errorMsg.classList.remove('hidden');
+    invalidIds.forEach(id => document.getElementById(id).setAttribute('aria-invalid', 'true'));
+  }
 
   btn.addEventListener('click', async () => {
     const prenom = document.getElementById('prenom').value.trim();
@@ -83,21 +120,21 @@ import Layout from '../layouts/Layout_loginpage.astro';
     const password = document.getElementById('password').value;
     const passwordConfirm = document.getElementById('password-confirm').value;
 
+    clearErrors();
+
     if (!prenom || !nom || !email || !password || !passwordConfirm) {
-      errorMsg.textContent = 'Veuillez remplir tous les champs.';
-      errorMsg.classList.remove('hidden');
+      setError('Veuillez remplir tous les champs.', inputs);
       return;
     }
 
     if (password !== passwordConfirm) {
-      errorMsg.textContent = 'Les mots de passe ne correspondent pas.';
-      errorMsg.classList.remove('hidden');
+      setError('Les mots de passe ne correspondent pas.', ['password', 'password-confirm']);
       return;
     }
 
     btn.disabled = true;
     btn.textContent = 'Inscription...';
-    errorMsg.classList.add('hidden');
+    btn.setAttribute('aria-busy', 'true');
 
     try {
       await pb.collection('users').create({
@@ -119,13 +156,13 @@ import Layout from '../layouts/Layout_loginpage.astro';
     } catch (e) {
       const msg = e?.response?.data;
       if (msg?.email) {
-        errorMsg.textContent = 'Cet email est déjà utilisé.';
+        setError('Cet email est déjà utilisé.', ['email']);
       } else {
-        errorMsg.textContent = 'Une erreur est survenue, réessaie.';
+        setError('Une erreur est survenue, réessaie.');
       }
-      errorMsg.classList.remove('hidden');
       btn.disabled = false;
       btn.textContent = 'Inscription';
+      btn.removeAttribute('aria-busy');
     }
   });
 </script>

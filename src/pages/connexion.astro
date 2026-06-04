@@ -8,42 +8,51 @@ import Layout from '../layouts/Layout_loginpage.astro';
     <div class="w-full max-w-sm">
 
       <!-- Tabs -->
-      <div class="flex mb-10">
-        <a href="/inscription" class="flex-1 text-center pb-3 font-plus-jakarta-sans text-sm font-bold uppercase tracking-widest text-[var(--color-void-black)] border-b-2 border-transparent hover:border-[var(--color-void-black)] transition-colors">
-          Inscription
-        </a>
-        <a href="/connexion" class="flex-1 text-center pb-3 font-plus-jakarta-sans text-sm font-bold uppercase tracking-widest text-[var(--color-nebula-blue-1)] border-b-2 border-[var(--color-nebula-blue-1)]">
-          Connexion
-        </a>
-      </div>
+      <nav aria-label="Navigation inscription et connexion">
+        <div class="flex mb-10" role="tablist">
+          <a href="/inscription" role="tab" aria-selected="false" class="flex-1 text-center pb-3 font-plus-jakarta-sans text-sm font-bold uppercase tracking-widest text-[var(--color-void-black)] border-b-2 border-transparent hover:border-[var(--color-void-black)] transition-colors">
+            Inscription
+          </a>
+          <a href="/connexion" role="tab" aria-selected="true" aria-current="page" class="flex-1 text-center pb-3 font-plus-jakarta-sans text-sm font-bold uppercase tracking-widest text-[var(--color-nebula-blue-1)] border-b-2 border-[var(--color-nebula-blue-1)]">
+            Connexion
+          </a>
+        </div>
+      </nav>
 
       <!-- Fields -->
-      <div class="flex flex-col gap-4">
+      <form class="flex flex-col gap-4" aria-label="Formulaire de connexion" onsubmit="return false;">
+        <label for="email" class="sr-only">Adresse e-mail</label>
         <input
           id="email"
           type="email"
           placeholder="Mail"
+          autocomplete="email"
+          aria-required="true"
           class="w-full rounded-full border border-[var(--color-void-black)]/20 bg-[var(--color-pure-white)] px-5 py-3.5 font-manrope text-sm text-[var(--color-void-black)] placeholder:text-[var(--color-void-black)]/40 outline-none focus:border-[var(--color-nebula-blue-1)] transition-colors"
         />
+        <label for="password" class="sr-only">Mot de passe</label>
         <input
           id="password"
           type="password"
           placeholder="Mot de passe"
+          autocomplete="current-password"
+          aria-required="true"
           class="w-full rounded-full border border-[var(--color-void-black)]/20 bg-[var(--color-pure-white)] px-5 py-3.5 font-manrope text-sm text-[var(--color-void-black)] placeholder:text-[var(--color-void-black)]/40 outline-none focus:border-[var(--color-nebula-blue-1)] transition-colors"
         />
-        <p id="error-msg" class="hidden text-center text-sm text-red-500 font-manrope"></p>
-      </div>
+        <p id="error-msg" class="hidden text-center text-sm text-red-500 font-manrope" role="alert" aria-live="assertive"></p>
 
-      <!-- Submit -->
-      <div class="mt-10 flex justify-center">
-        <button
-          id="btn-connexion"
-          type="button"
-          class="rounded-full bg-[var(--color-void-black)] px-12 py-3.5 font-plus-jakarta-sans text-sm font-bold uppercase tracking-widest text-[var(--color-pure-white)] hover:opacity-80 transition-opacity disabled:opacity-40"
-        >
-          Se connecter
-        </button>
-      </div>
+        <!-- Submit -->
+        <div class="mt-10 flex justify-center">
+          <button
+            id="btn-connexion"
+            type="submit"
+            aria-label="Se connecter à votre compte OrDaily"
+            class="rounded-full bg-[var(--color-void-black)] px-12 py-3.5 font-plus-jakarta-sans text-sm font-bold uppercase tracking-widest text-[var(--color-pure-white)] hover:opacity-80 transition-opacity disabled:opacity-40"
+          >
+            Se connecter
+          </button>
+        </div>
+      </form>
 
     </div>
   </div>
@@ -67,12 +76,17 @@ import Layout from '../layouts/Layout_loginpage.astro';
     if (!email || !password) {
       errorMsg.textContent = 'Veuillez remplir tous les champs.';
       errorMsg.classList.remove('hidden');
+      emailInput.setAttribute('aria-invalid', 'true');
+      passwordInput.setAttribute('aria-invalid', 'true');
       return;
     }
 
     btn.disabled = true;
     btn.textContent = 'Connexion...';
+    btn.setAttribute('aria-busy', 'true');
     errorMsg.classList.add('hidden');
+    emailInput.removeAttribute('aria-invalid');
+    passwordInput.removeAttribute('aria-invalid');
 
     try {
       await pb.collection('users').authWithPassword(email, password);
@@ -80,8 +94,11 @@ import Layout from '../layouts/Layout_loginpage.astro';
     } catch (e) {
       errorMsg.textContent = 'Email ou mot de passe incorrect.';
       errorMsg.classList.remove('hidden');
+      emailInput.setAttribute('aria-invalid', 'true');
+      passwordInput.setAttribute('aria-invalid', 'true');
       btn.disabled = false;
       btn.textContent = 'Se connecter';
+      btn.removeAttribute('aria-busy');
     }
   });
 </script>
