@@ -1,0 +1,96 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout titre="Classement">
+
+  <div class="px-6 pt-10 mb-16">
+
+    <h1 class="font-plus-jakarta-sans text-2xl font-bold text-[var(--color-void-black)] mb-8">Classement</h1>
+
+    <div id="liste-classement" class="flex flex-col gap-3">
+      <p id="loading" class="font-manrope text-sm text-[var(--color-void-black)]/40">Chargement...</p>
+    </div>
+
+    <!-- Joueur connecté hors top 10 -->
+    <div id="bloc-moi" class="hidden mt-6">
+      <div class="flex items-center gap-2 mb-3">
+        <div class="h-px flex-1 bg-gray-200"></div>
+        <span class="font-plus-jakarta-sans mt-2 text-xl text-[var(--color-void-black)]/40">Votre position</span>
+        <div class="h-px flex-1 bg-gray-200"></div>
+      </div>
+      <div id="carte-moi"></div>
+    </div>
+
+  </div>
+
+</Layout>
+
+<script>
+  import PocketBase from 'pocketbase';
+
+  const pb = new PocketBase('http://127.0.0.1:8090');
+
+  if (!pb.authStore.isValid) {
+    window.location.href = '/connexion';
+  }
+
+  await pb.collection('users').authRefresh();
+  const moi = pb.authStore.record;
+
+  const users = await pb.collection('users').getFullList({
+    sort: '-created',
+    fields: 'id,prenom,nom,avancee_budget,avancee_logement,avancee_administratif,avancee_organisation,avancee_sante,created',
+  });
+
+  const classement = users.map(u => ({
+    ...u,
+    score: (u.avancee_budget ?? 0) + (u.avancee_logement ?? 0) + (u.avancee_administratif ?? 0) + (u.avancee_organisation ?? 0) + (u.avancee_sante ?? 0),
+  })).sort((a, b) => b.score - a.score);
+
+  const top10 = classement.slice(0, 10);
+  const monRang = classement.findIndex(u => u.id === moi.id);
+  const dansTop10 = monRang < 10;
+
+  function pct(score) {
+    return Math.round((score / 100) * 100);
+  }
+
+  function creerCarte(u, rang, estMoi) {
+    const carte = document.createElement('div');
+
+    carte.className = 'rounded-2xl border px-5 py-4 flex items-center gap-4';
+    carte.style.backgroundColor = 'white';
+    carte.style.borderColor = estMoi ? '#F5A623' : '#e5e7eb';
+    carte.style.borderColor = estMoi ? '#F5A623' : '#e5e7eb';
+
+    const couleurTexte = estMoi ? '#F5A623' : 'var(--color-nebula-blue-1)';
+    const couleurBadge = estMoi ? '#F5A623' : 'var(--color-void-black)';
+    const couleurBarre = estMoi ? '#F5A623' : 'var(--color-nebula-blue-1)';
+
+    carte.innerHTML = `
+      <span class="font-plus-jakarta-sans text-lg font-bold w-6 text-center" style="color: ${couleurTexte}">${rang + 1}</span>
+      <div class="flex-1">
+        <p class="font-plus-jakarta-sans text-sm font-bold text-[var(--color-void-black)]">${u.prenom ?? ''} ${u.nom ?? ''}</p>
+        <div class="mt-2 h-1.5 w-full rounded-full bg-gray-100">
+          <div class="h-1.5 rounded-full transition-all" style="width: ${pct(u.score)}%; background-color: ${couleurBarre}"></div>
+        </div>
+      </div>
+      <span class="rounded-full px-3 py-1 font-manrope text-xs font-semibold text-white" style="background-color: ${couleurBadge}">${pct(u.score)}%</span>
+    `;
+    return carte;
+  }
+
+  const liste = document.getElementById('liste-classement');
+  document.getElementById('loading').remove();
+
+  top10.forEach((u, i) => {
+    liste.appendChild(creerCarte(u, i, u.id === moi.id));
+  });
+
+  if (!dansTop10) {
+    const blocMoi = document.getElementById('bloc-moi');
+    blocMoi.classList.remove('hidden');
+    document.getElementById('carte-moi').appendChild(creerCarte(classement[monRang], monRang, true));
+  }
+</script>

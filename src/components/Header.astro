@@ -1,0 +1,69 @@
+<nav class="sticky top-0 z-50 flex h-14 items-center justify-center gap-[20vh] lg:gap-[100vh] overflow-hidden border border-white/20 bg-[#FAF7F2]/20 px-3 shadow-[0_0.25rem_0.625rem_rgba(0,0,0,0.25)] backdrop-blur-md min-[400px]:h-16 min-[400px]:gap-8 min-[400px]:px-4 sm:px-6 lg:h-32">
+  <a href="/home/" class="flex shrink-0 items-center">
+    <img
+      id="nav-logo"
+      src="/icons/ordaily_logo.svg"
+      alt="Ordaily Logo"
+      class="block w-20 h-auto min-[400px]:w-24 sm:w-28 lg:w-32 transition-all duration-300"
+    />
+  </a>
+
+  <!-- Bouton burger -->
+  <button
+    id="menu-btn"
+    class="flex flex-col justify-center items-center gap-1.5 w-20 h-20 shrink-0 transition-transform duration-300"
+    aria-label="Menu"
+  >
+    <span class="block w-6 h-0.5 bg-[var(--color-void-black)] rounded-full transition-all duration-300"></span>
+    <span class="block w-6 h-0.5 bg-[var(--color-void-black)] rounded-full transition-all duration-300"></span>
+    <span class="block w-4 h-0.5 bg-[var(--color-void-black)] rounded-full transition-all duration-300"></span>
+  </button>
+</nav>
+
+<!-- Overlay menu -->
+<div
+  id="menu-overlay"
+  class="fixed inset-0 z-40 flex flex-col bg-gradient-to-b from-[#4F6EF7] to-[#6B8BFF] px-8 pt-20 lg:pt-32 pb-10 translate-x-full transition-transform duration-500 ease-in-out"
+>
+  <div class="flex flex-col gap-8 flex-1 mt-20">
+    <a href="/home" class="font-plus-jakarta-sans text-2xl font-bold text-white hover:opacity-70 transition-opacity">Tableau de bord</a>
+    <a href="/home/profil" class="font-plus-jakarta-sans text-2xl font-bold text-white hover:opacity-70 transition-opacity">Mon espace</a>
+    <a href="/home/leaderbord" class="font-plus-jakarta-sans text-2xl font-bold text-white hover:opacity-70 transition-opacity">Classement</a>
+  </div>
+
+  <div class="border-t border-white/30 pt-8 flex flex-col gap-6">
+    <a href="/a-propos" class="font-plus-jakarta-sans text-lg font-bold text-white hover:opacity-70 transition-opacity">À propos</a>
+    <a href="/contact" class="font-plus-jakarta-sans text-lg font-bold text-white hover:opacity-70 transition-opacity">Contact</a>
+  </div>
+</div>
+
+<script>
+  const btn = document.getElementById('menu-btn');
+  const overlay = document.getElementById('menu-overlay');
+  const logo = document.getElementById('nav-logo');
+
+  btn.addEventListener('click', () => {
+    const isOpen = !overlay.classList.contains('translate-x-full');
+
+    if (isOpen) {
+      overlay.classList.add('translate-x-full');
+      btn.classList.remove('rotate-90');
+      logo.classList.remove('brightness-0', 'invert');
+      document.body.style.overflow = '';
+    } else {
+      overlay.classList.remove('translate-x-full');
+      btn.classList.add('rotate-90');
+      logo.classList.add('brightness-0', 'invert');
+      document.body.style.overflow = 'hidden';
+    }
+  });
+
+  overlay.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      overlay.classList.add('translate-x-full');
+      btn.classList.remove('rotate-90');
+      logo.classList.remove('brightness-0', 'invert');
+      document.body.style.overflow = '';
+    });
+  });
+</script>

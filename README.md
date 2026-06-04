@@ -3,12 +3,12 @@
 
 Éléménts à renseigner pour la soutenance :
 
-- [ ] Nom du projet :
+- [ ] Nom du projet : Ordaily
 - [ ] URL de la landing page :
 - [ ] URL de l'application finale :
 - [ ] URL de connexion au back office :
-- [ ] Identifiant de connexion au backoffice :
-- [ ] Mot de passe de connexion au backoffice :
+- [ ] Identifiant de connexion au backoffice : admin@admin.com
+- [ ] Mot de passe de connexion au backoffice : admin1234
 - [ ] URL de la maquette FIGMA :
 - [ ] Description du projet :
 
