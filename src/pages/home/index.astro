@@ -117,7 +117,7 @@ import Layout from '../../layouts/Layout.astro';
 <script>
   import PocketBase from 'pocketbase';
 
-  const pb = new PocketBase('http://127.0.0.1:8090');
+  const pb = new PocketBase('https://pb-ordaily.nathan-batista-balanche.fr');
 
   if (!pb.authStore.isValid) {
     window.location.href = '/connexion';
@@ -126,6 +126,8 @@ import Layout from '../../layouts/Layout.astro';
   await pb.collection('users').authRefresh();
 
   const user = pb.authStore.record;
+
+  document.getElementById('greeting').textContent = `Bonjour ${user.prenom} !`; // ← ajout
 
   const total =
     (user.avancee_logement      ?? 0) +
