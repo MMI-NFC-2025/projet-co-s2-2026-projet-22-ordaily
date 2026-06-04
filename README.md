@@ -9,8 +9,8 @@
 - [ ] URL de connexion au back office :
 - [ ] Identifiant de connexion au backoffice : admin@admin.com
 - [ ] Mot de passe de connexion au backoffice : admin1234
-- [ ] URL de la maquette FIGMA :
-- [ ] Description du projet :
+- [ ] URL de la maquette FIGMA : https://www.figma.com/design/1FhyEm8whzD6GTnat0YbZA/ORDAILY?node-id=0-1&t=nqEXXMQzUVL5iMst-1
+- [ ] Description du projet : Ordaily est un projet visant à aider les jeunes adultes dans leur entrée dans la vie adulte
 
 ## 🚀 Équipe
 
