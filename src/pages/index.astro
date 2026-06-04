@@ -1,10 +1,186 @@
 ---
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from '../layouts/Layout_landingpage.astro';
 ---
 
 <Layout titre="Ordaily">
-    <p class="font-plus-jakarta-sans bg-nebula-blue-1">Bienvenue sur OrDaily, ton point de repère pour avancer sereinement dans les démarches de la vie adulte.</p>
+
+  <section class="flex min-h-[20vh] sm:min-h-[60vh] lg:min-h-[80vh] items-center justify-center">
+    <p class="font-plus-jakarta-sans text-sm sm:text-2xl lg:text-4xl font-bold leading-snug text-[var(--color-void-black)] max-w-lg pl-40 lg:max-w-4xl lg:pl-60">
+      Bienvenue sur <span style="background: var(--gradient-blue); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">OrDaily</span>,<br />
+      ton point de repère pour avancer sereinement dans les démarches de la vie adulte.
+    </p>
+  </section>
+
+  <div class="flex justify-center pb-16 mt-[15vh] md:mt-[30vh] lg:mt-[40vh]">
+    <a href="#probleme" class="font-plus-jakarta-sans text-sm font-semibold tracking-widest text-[var(--color-void-black)] uppercase">
+      Découvrir ↓
+    </a>
+  </div>
+
+  <section id="probleme" class="py-8">
+    <div class="inline-block rounded-r-full bg-[var(--color-nebula-blue-1)] px-10 py-3 mb-8">
+      <span class="font-plus-jakarta-sans text-lg font-semibold text-white">Le problème ?</span>
+    </div>
+    <div class="px-16 space-y-4 text-[var(--color-void-black)] font-manrope text-sm leading-relaxed">
+      <p>Entrer dans la vie adulte implique souvent de devoir gérer de nombreuses démarches en même temps : trouver un logement, comprendre les aides, gérer un budget ou effectuer des démarches administratives.</p>
+      <p>L'information existe, mais elle est souvent dispersée entre plusieurs sites et difficile à comprendre. Il devient alors compliqué de savoir par où commencer.</p>
+      <p><span style="background: var(--gradient-blue); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700;">OrDaily</span> a été pensé pour apporter des repères simples et aider les jeunes à mieux s'orienter face à ces premières responsabilités.</p>
+    </div>
+  </section>
+
+  <section class="py-8">
+    <div class="flex justify-end mb-8">
+      <div class="rounded-l-full px-10 py-3" style="background: var(--gradient-blue);">
+        <span class="font-plus-jakarta-sans text-lg font-semibold text-white">La solution !</span>
+      </div>
+    </div>
+    <div class="px-16 space-y-4 text-[var(--color-void-black)] font-manrope text-sm leading-relaxed">
+      <p><span style="background: var(--gradient-blue); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700;">OrDaily</span> rassemble et organise les informations essentielles pour rendre les démarches plus claires et plus accessibles.</p>
+      <p>L'application propose des parcours guidés qui expliquent les différentes étapes à suivre selon la situation de l'utilisateur. Chaque démarche est présentée de manière simple afin de comprendre quoi faire, dans quel ordre et sans se sentir submergé.</p>
+      <p>L'objectif est de transformer des démarches parfois complexes en étapes compréhensibles et progressives.</p>
+    </div>
+  </section>
+
+  <section class="py-12 px-8 lg:px-16 relative">
+    <img
+      src="/images/landingpage/landingpage_wave_faq.svg"
+      alt=""
+      aria-hidden="true"
+      class="pointer-events-none select-none absolute left-0 top-0 h-full w-auto hidden lg:block"
+    />
+    <h2 class="lg:ml-[33%] font-plus-jakarta-sans text-lg font-bold text-[var(--color-void-black)] mb-10">Comment ça fonctionne ?</h2>
+    <div class="space-y-8 flex flex-col items-end">
+
+      <div class="w-full lg:w-2/3">
+        <div class="flex items-center rounded-full py-3 pl-3 pr-6 mb-3" style="background: var(--gradient-blue);">
+          <span class="font-plus-jakarta-sans font-bold text-white text-base bg-[var(--color-void-black)] rounded-full w-10 h-10 flex items-center justify-center shrink-0 mr-4">1</span>
+          <span class="font-plus-jakarta-sans font-bold text-white">Tu indiques ta situation</span>
+        </div>
+        <p class="font-manrope text-sm text-[var(--color-void-black)] leading-relaxed px-4">Un court questionnaire permet de comprendre tes besoins et tes priorités.</p>
+      </div>
+
+      <div class="w-full lg:w-2/3">
+        <div class="flex items-center rounded-full py-3 pl-3 pr-6 mb-3" style="background: var(--gradient-blue);">
+          <span class="font-plus-jakarta-sans font-bold text-white text-base bg-[var(--color-void-black)] rounded-full w-10 h-10 flex items-center justify-center shrink-0 mr-4">2</span>
+          <span class="font-plus-jakarta-sans font-bold text-white">OrDaily te propose un parcours</span>
+        </div>
+        <p class="font-manrope text-sm text-[var(--color-void-black)] leading-relaxed px-4">Des thématiques et des démarches adaptées à ta situation sont mises en avant.</p>
+      </div>
+
+      <div class="w-full lg:w-2/3">
+        <div class="flex items-center rounded-full py-3 pl-3 pr-6 mb-3" style="background: var(--gradient-blue);">
+          <span class="font-plus-jakarta-sans font-bold text-white text-base bg-[var(--color-void-black)] rounded-full w-10 h-10 flex items-center justify-center shrink-0 mr-4">3</span>
+          <span class="font-plus-jakarta-sans font-bold text-white">Tu avances étape par étape</span>
+        </div>
+        <p class="font-manrope text-sm text-[var(--color-void-black)] leading-relaxed px-4">Chaque démarche est expliquée simplement pour t'aider à comprendre quoi faire et comment progresser.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="inline-block rounded-r-full bg-[var(--color-nebula-blue-1)] px-10 py-3 mb-8 mt-8">
+    <span class="font-plus-jakarta-sans text-lg font-semibold text-white">Nos Thématiques</span>
+  </div>
+  <section class="pt-6 pb-12 px-8 lg:px-16">
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <div class="relative rounded-2xl overflow-hidden">
+        <img src="/images/landingpage/ordaily_logement.webp" alt="Logement" class="w-full h-48 object-cover" />
+        <div class="absolute bottom-0 left-0 right-0 px-4 py-3 bg-[var(--color-void-black)] rounded-b-2xl">
+          <span class="font-plus-jakarta-sans font-bold text-white text-sm">Logement</span>
+        </div>
+      </div>
+
+      <div class="relative rounded-2xl overflow-hidden">
+        <img src="/images/landingpage/ordaily_budget.webp" alt="Gestion de l'argent" class="w-full h-48 object-cover" />
+        <div class="absolute bottom-0 left-0 right-0 px-4 py-3 bg-[var(--color-void-black)] rounded-b-2xl">
+          <span class="font-plus-jakarta-sans font-bold text-white text-sm">Gestion de l'argent</span>
+        </div>
+      </div>
+
+      <div class="relative rounded-2xl overflow-hidden">
+        <img src="/images/landingpage/ordaily_administratif.webp" alt="Administration" class="w-full h-48 object-cover" />
+        <div class="absolute bottom-0 left-0 right-0 px-4 py-3 bg-[var(--color-void-black)] rounded-b-2xl">
+          <span class="font-plus-jakarta-sans font-bold text-white text-sm">Administration</span>
+        </div>
+      </div>
+
+      <div class="relative rounded-2xl overflow-hidden">
+        <img src="/images/landingpage/ordaily_organisation.webp" alt="Organisation" class="w-full h-48 object-cover" />
+        <div class="absolute bottom-0 left-0 right-0 px-4 py-3 bg-[var(--color-void-black)] rounded-b-2xl">
+          <span class="font-plus-jakarta-sans font-bold text-white text-sm">Organisation</span>
+        </div>
+      </div>
+
+      <div class="relative rounded-2xl overflow-hidden">
+        <img src="/images/landingpage/ordaily_sante.webp" alt="Santé" class="w-full h-48 object-cover" />
+        <div class="absolute bottom-0 left-0 right-0 px-4 py-3 bg-[var(--color-void-black)] rounded-b-2xl">
+          <span class="font-plus-jakarta-sans font-bold text-white text-sm">Santé</span>
+        </div>
+      </div>
+
+      <div class="hidden lg:flex flex-col justify-center px-4">
+        <p class="font-plus-jakarta-sans font-bold text-lg text-[var(--color-void-black)] mb-6">Commence à t'orienter plus facilement dans tes démarches.</p>
+        <a href="#" class="inline-block rounded-full px-6 py-3 font-plus-jakarta-sans font-semibold text-white text-sm text-center" style="background: var(--gradient-orange);">
+          Découvrir les parcours
+        </a>
+      </div>
+
+    </div>
+
+    <div class="lg:hidden mt-8 flex flex-col items-center gap-4">
+      <p class="font-plus-jakarta-sans font-bold text-lg text-[var(--color-void-black)] text-center">Commence à t'orienter plus facilement dans tes démarches.</p>
+      <a href="#" class="inline-block rounded-full px-6 py-3 font-plus-jakarta-sans font-semibold text-white text-sm" style="background: var(--gradient-orange);">
+        Découvrir les parcours
+      </a>
+    </div>
+
+  </section>
+
+  <div class="inline-block rounded-r-full bg-[var(--color-nebula-blue-1)] px-10 py-3 mb-8 mt-8">
+    <span class="font-plus-jakarta-sans text-lg font-semibold text-white">FAQ</span>
+  </div>
+  <section class="py-12 px-8 lg:px-16">
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-10">
+
+      <div>
+        <h3 class="font-plus-jakarta-sans text-base font-bold text-[var(--color-void-black)] mb-3">Est-ce que OrDaily remplace les services administratifs ?</h3>
+        <p class="font-manrope text-sm text-[var(--color-void-black)] leading-relaxed">Non. OrDaily ne remplace pas les services officiels, il t'aide à mieux comprendre les démarches et à savoir par où commencer.</p>
+      </div>
+
+      <div>
+        <h3 class="font-plus-jakarta-sans text-base font-bold text-[var(--color-void-black)] mb-3">Que contient la version premium ?</h3>
+        <p class="font-manrope text-sm text-[var(--color-void-black)] leading-relaxed mb-2">La version premium permet d'accéder à :</p>
+        <ul class="font-manrope text-sm text-[var(--color-void-black)] leading-relaxed list-disc list-inside space-y-1">
+          <li>des parcours plus détaillés</li>
+          <li>des conseils approfondis</li>
+          <li>un accompagnement plus personnalisé</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-plus-jakarta-sans text-base font-bold text-[var(--color-void-black)] mb-3">Est-ce que l'application est gratuite ?</h3>
+        <p class="font-manrope text-sm text-[var(--color-void-black)] leading-relaxed">OrDaily propose une version gratuite avec les fonctionnalités essentielles. Une version premium permet d'accéder à des contenus et fonctionnalités supplémentaires.</p>
+      </div>
+
+      <div>
+        <h3 class="font-plus-jakarta-sans text-base font-bold text-[var(--color-void-black)] mb-3">Dois-je payer pour utiliser OrDaily ?</h3>
+        <p class="font-manrope text-sm text-[var(--color-void-black)] leading-relaxed">Non, tu peux utiliser OrDaily gratuitement. Le premium est optionnel.</p>
+      </div>
+
+      <div>
+        <h3 class="font-plus-jakarta-sans text-base font-bold text-[var(--color-void-black)] mb-3">Mes données sont-elles utilisées ?</h3>
+        <p class="font-manrope text-sm text-[var(--color-void-black)] leading-relaxed">Tes données servent uniquement à personnaliser ton expérience. Elles ne sont ni vendues ni partagées.</p>
+      </div>
+
+      <div>
+        <h3 class="font-plus-jakarta-sans text-base font-bold text-[var(--color-void-black)] mb-3">Puis-je utiliser OrDaily à mon rythme ?</h3>
+        <p class="font-manrope text-sm text-[var(--color-void-black)] leading-relaxed">Oui. Tu peux suivre un parcours ou consulter librement les contenus selon tes besoins.</p>
+      </div>
+
+    </div>
+  </section>
+
 </Layout>

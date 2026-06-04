@@ -17,16 +17,6 @@ const { titre } = Astro.props;
 
   <body class="relative min-h-screen overflow-x-hidden bg-pure-white">
     <Header />
-
-    <div class="absolute inset-0 -z-10 overflow-hidden">
-      <img
-        src="/images/ordaily_waves.svg"
-        alt=""
-        aria-hidden="true"
-        class="pointer-events-none absolute -mt-14 left-1/2 top-14 w-[80vw] max-w-none translate-x-[20%] select-none min-[400px]:top-16 lg:top-20 lg:w-[80rem] lg:-translate-y-[20%] lg:translate-x-[2%]"
-      />
-    </div>
-
     <main class="relative z-10">
       <slot />
     </main>

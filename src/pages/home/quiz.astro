@@ -1,0 +1,171 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout titre="Quiz journalier">
+
+  <div class="px-6 pt-10 mb-16">
+
+    <h1 class="font-plus-jakarta-sans text-2xl font-bold text-[var(--color-void-black)] mb-2">Quiz journalier</h1>
+    <p class="font-manrope text-sm text-[var(--color-void-black)]/50 mb-8">3 questions pour réviser le quotidien</p>
+
+    <!-- Progression quiz -->
+    <div class="flex gap-2 mb-8">
+      <div id="dot-1" class="h-1.5 flex-1 rounded-full bg-gray-200"></div>
+      <div id="dot-2" class="h-1.5 flex-1 rounded-full bg-gray-200"></div>
+      <div id="dot-3" class="h-1.5 flex-1 rounded-full bg-gray-200"></div>
+    </div>
+
+    <!-- Question -->
+    <div id="bloc-question" class="rounded-2xl border border-gray-200 bg-white px-5 py-6 flex flex-col gap-5">
+      <p id="question-numero" class="font-manrope text-xs text-[var(--color-void-black)]/40"></p>
+      <p id="question-texte" class="font-plus-jakarta-sans text-sm font-bold text-[var(--color-void-black)]">Chargement...</p>
+      <div class="flex flex-col gap-3">
+        <button id="btn-a" class="w-full rounded-full border border-gray-200 bg-gray-50 px-5 py-3.5 font-manrope text-sm text-[var(--color-void-black)] hover:border-blue-400 transition-colors text-left"></button>
+        <button id="btn-b" class="w-full rounded-full border border-gray-200 bg-gray-50 px-5 py-3.5 font-manrope text-sm text-[var(--color-void-black)] hover:border-blue-400 transition-colors text-left"></button>
+      </div>
+      <p id="feedback" class="hidden text-center text-sm font-manrope font-semibold"></p>
+    </div>
+
+    <!-- Résultat final -->
+    <div id="bloc-resultat" class="hidden rounded-2xl border border-gray-200 bg-white px-5 py-8 flex flex-col items-center gap-4 text-center">
+      <p class="text-4xl" id="resultat-emoji"></p>
+      <p id="resultat-titre" class="font-plus-jakarta-sans text-lg font-bold text-[var(--color-void-black)]"></p>
+      <p id="resultat-score" class="font-manrope text-sm text-[var(--color-void-black)]/50"></p>
+      <a href="/home" class="mt-4 rounded-full bg-[var(--color-void-black)] px-10 py-3.5 font-plus-jakarta-sans text-sm font-bold uppercase tracking-widest text-white hover:opacity-80 transition-opacity">
+        Retour à l'accueil
+      </a>
+    </div>
+
+  </div>
+
+</Layout>
+
+<script>
+  import PocketBase from 'pocketbase';
+
+  const pb = new PocketBase('http://127.0.0.1:8090');
+
+  if (!pb.authStore.isValid) {
+    window.location.href = '/connexion';
+  }
+
+  await pb.collection('users').authRefresh();
+  const user = pb.authStore.record;
+
+  // Vérifier si déjà fait aujourd'hui
+  const aujourd_hui = new Date().toISOString().split('T')[0];
+  const participation = await pb.collection('quizjournalier_participation')
+    .getFirstListItem(`utilisateur = "${user.id}"`)
+    .catch(() => null);
+
+  if (participation && participation.derniere_participation.startsWith(aujourd_hui)) {
+    window.location.href = '/home';
+  }
+
+  // Tirer 3 questions au hasard dans les 5 tables
+  const tables = ['question_logement', 'question_budget', 'question_administratif', 'question_organisation', 'question_sante'];
+  // Mélange les tables et prend 3
+  const tablesChoisies = tables.sort(() => Math.random() - 0.5).slice(0, 3);
+
+  const questions = await Promise.all(
+    tablesChoisies.map(async (table) => {
+      const all = await pb.collection(table).getFullList();
+      return all[Math.floor(Math.random() * all.length)];
+    })
+  );
+
+  let questionActuelle = 0;
+  let score = 0;
+
+  const dots = [
+    document.getElementById('dot-1'),
+    document.getElementById('dot-2'),
+    document.getElementById('dot-3'),
+  ];
+
+  function majDots() {
+    dots.forEach((dot, i) => {
+      if (i < questionActuelle) {
+        dot.style.backgroundColor = '#F5A623';
+      } else if (i === questionActuelle) {
+        dot.style.backgroundColor = 'var(--color-nebula-blue-1)';
+      } else {
+        dot.style.backgroundColor = '#e5e7eb';
+      }
+    });
+  }
+
+  function afficherQuestion() {
+    const q = questions[questionActuelle];
+    document.getElementById('question-numero').textContent = `Question ${questionActuelle + 1} / 3`;
+    document.getElementById('question-texte').textContent = q.question;
+    document.getElementById('btn-a').textContent = q.reponse_a;
+    document.getElementById('btn-b').textContent = q.reponse_b;
+    document.getElementById('btn-a').disabled = false;
+    document.getElementById('btn-b').disabled = false;
+    document.getElementById('btn-a').style.borderColor = '';
+    document.getElementById('btn-b').style.borderColor = '';
+    document.getElementById('feedback').classList.add('hidden');
+    majDots();
+  }
+
+  async function terminer() {
+    // Enregistre la participation
+    if (participation) {
+      await pb.collection('quizjournalier_participation').update(participation.id, {
+        derniere_participation: new Date().toISOString(),
+      });
+    } else {
+      await pb.collection('quizjournalier_participation').create({
+        utilisateur: user.id,
+        derniere_participation: new Date().toISOString(),
+      });
+    }
+
+    // Affiche le résultat
+    document.getElementById('bloc-question').classList.add('hidden');
+    document.getElementById('bloc-resultat').classList.remove('hidden');
+    dots.forEach(d => d.style.backgroundColor = '#F5A623');
+
+    const icone = score === 3 ? 'trophy_icon' : score === 2 ? 'muscle_icon' : score === 1 ? 'thumbsup_icon' : 'disappointed_icon';
+    const titre = score === 3 ? 'Parfait !' : score === 2 ? 'Bien joué !' : score === 1 ? 'Continue comme ça !' : 'Retente demain !';
+
+    document.getElementById('resultat-emoji').innerHTML = `<img src="/icons/${icone}.svg" alt="" class="w-16 h-16" />`;
+    document.getElementById('resultat-titre').textContent = titre;
+    document.getElementById('resultat-score').textContent = `${score} bonne${score > 1 ? 's' : ''} réponse${score > 1 ? 's' : ''} sur 3`;
+  }
+
+  async function repondre(choix) {
+    const q = questions[questionActuelle];
+    document.getElementById('btn-a').disabled = true;
+    document.getElementById('btn-b').disabled = true;
+
+    const feedback = document.getElementById('feedback');
+    const correct = choix === q.reponse_juste;
+
+    if (correct) {
+      score++;
+      feedback.textContent = '✓ Bonne réponse !';
+      feedback.className = 'text-center text-sm font-manrope font-semibold text-green-500';
+    } else {
+      feedback.textContent = `✗ La bonne réponse était : ${q[q.reponse_juste]}`;
+      feedback.className = 'text-center text-sm font-manrope font-semibold text-red-500';
+    }
+    feedback.classList.remove('hidden');
+
+    setTimeout(async () => {
+      questionActuelle++;
+      if (questionActuelle < 3) {
+        afficherQuestion();
+      } else {
+        await terminer();
+      }
+    }, 1500);
+  }
+
+  document.getElementById('btn-a').addEventListener('click', () => repondre('reponse_a'));
+  document.getElementById('btn-b').addEventListener('click', () => repondre('reponse_b'));
+
+  afficherQuestion();
+</script>

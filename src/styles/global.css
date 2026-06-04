@@ -1,4 +1,3 @@
-/* Puis Tailwind */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,13 +5,20 @@
 @font-face {
   font-family: 'Manrope';
   src: url('/fonts/Manrope-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
+
 @font-face {
   font-family: 'Plus Jakarta Sans';
   src: url('/fonts/PlusJakartaSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
-@theme {
+:root {
   --color-nebula-blue-1: #0066FF;
   --color-nebula-blue-2: #8FA0FF;
 
@@ -26,10 +32,11 @@
   --gradient-orange: linear-gradient(90deg, #FF9F1C, #FFC857);
 }
 
-/* Force la police */
+
 .font-manrope {
-  font-family: 'Manrope', cursive !important;
+  font-family: 'Manrope', sans-serif;
 }
+
 .font-plus-jakarta-sans {
-  font-family: 'Plus Jakarta Sans', cursive !important;
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }

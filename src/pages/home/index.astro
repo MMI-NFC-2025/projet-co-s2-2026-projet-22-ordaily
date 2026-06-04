@@ -1,0 +1,187 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout titre="Accueil">
+
+  <!-- Header -->
+  <div class="flex items-center justify-center gap-16 sm:gap-32 lg:gap-48 px-6 pt-10">
+    <h1 id="greeting" class="font-plus-jakarta-sans text-2xl font-bold text-[var(--color-void-black)]">
+      Bonjour !
+    </h1>
+    <span id="progression" class="rounded-full bg-[#F5A623] px-5 py-2 font-manrope text-sm font-semibold text-white">
+      Progression 0%
+    </span>
+  </div>
+
+  <!-- Card Quiz journalier -->
+  <div class="px-6 pt-8">
+    <h2 class="font-plus-jakarta-sans text-lg font-bold text-[var(--color-void-black)] mb-4">Quiz journalier</h2>
+    <a id="quiz-card" href="/home/quiz" class="block rounded-2xl border border-[var(--color-nebula-blue-1)]/30 bg-white px-5 py-4 hover:border-[var(--color-nebula-blue-1)] transition-colors">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <img src="/icons/brain_icon.svg" alt="Logement" class="w-8 h-8" />
+          <div>
+            <p class="font-plus-jakarta-sans text-sm font-bold text-[var(--color-void-black)]">Quiz journalier</p>
+            <p id="quiz-statut" class="font-manrope text-xs text-[var(--color-void-black)]/50 mt-0.5">Chargement...</p>
+          </div>
+        </div>
+        <span id="quiz-badge" class="rounded-full px-3 py-1 font-manrope text-xs font-semibold text-white bg-[var(--color-nebula-blue-1)]">
+          Jouer
+        </span>
+      </div>
+    </a>
+  </div>
+
+  <!-- Parcours -->
+  <div class="px-6 pt-10 mb-16">
+    <h2 class="font-plus-jakarta-sans text-lg font-bold text-[var(--color-void-black)] mb-4">Mes parcours</h2>
+
+    <div class="flex flex-col gap-3">
+
+      <!-- Logement -->
+      <a href="/home/logement" class="rounded-2xl border border-[var(--color-void-black)]/10 bg-white px-5 py-4 hover:border-[var(--color-nebula-blue-1)] transition-colors">
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center gap-2">
+            <img src="/icons/logement_icon.svg" alt="Logement" class="w-8 h-8" />
+            <span class="font-plus-jakarta-sans text-sm font-bold text-[var(--color-void-black)]">Logement</span>
+          </div>
+          <span id="pct-logement" class="rounded-full bg-[var(--color-void-black)] px-3 py-1 font-manrope text-xs font-semibold text-white">0%</span>
+        </div>
+        <div class="h-1.5 w-full rounded-full bg-[var(--color-void-black)]/10">
+          <div id="bar-logement" class="h-1.5 rounded-full bg-[var(--color-nebula-blue-1)] transition-all" style="width: 0%"></div>
+        </div>
+      </a>
+
+      <!-- Budget -->
+      <a href="/home/budget" class="rounded-2xl border border-[var(--color-void-black)]/10 bg-white px-5 py-4 hover:border-[var(--color-nebula-blue-1)] transition-colors">
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center gap-2">
+            <img src="/icons/budget_icon.svg" alt="Budget" class="w-8 h-8" />
+            <span class="font-plus-jakarta-sans text-sm font-bold text-[var(--color-void-black)]">Budget</span>
+          </div>
+          <span id="pct-budget" class="rounded-full bg-[var(--color-void-black)] px-3 py-1 font-manrope text-xs font-semibold text-white">0%</span>
+        </div>
+        <div class="h-1.5 w-full rounded-full bg-[var(--color-void-black)]/10">
+          <div id="bar-budget" class="h-1.5 rounded-full bg-[var(--color-nebula-blue-1)] transition-all" style="width: 0%"></div>
+        </div>
+      </a>
+
+      <!-- Administration -->
+      <a href="/home/administration" class="rounded-2xl border border-[var(--color-void-black)]/10 bg-white px-5 py-4 hover:border-[var(--color-nebula-blue-1)] transition-colors">
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center gap-2">
+            <img src="/icons/administration_icon.svg" alt="Administration" class="w-8 h-8" />
+            <span class="font-plus-jakarta-sans text-sm font-bold text-[var(--color-void-black)]">Administration</span>
+          </div>
+          <span id="pct-administration" class="rounded-full bg-[var(--color-void-black)] px-3 py-1 font-manrope text-xs font-semibold text-white">0%</span>
+        </div>
+        <div class="h-1.5 w-full rounded-full bg-[var(--color-void-black)]/10">
+          <div id="bar-administration" class="h-1.5 rounded-full bg-[var(--color-nebula-blue-1)] transition-all" style="width: 0%"></div>
+        </div>
+      </a>
+
+      <!-- Organisation -->
+      <a href="/home/organisation" class="rounded-2xl border border-[var(--color-void-black)]/10 bg-white px-5 py-4 hover:border-[var(--color-nebula-blue-1)] transition-colors">
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center gap-2">
+            <img src="/icons/organisation_icon.svg" alt="Organisation" class="w-8 h-8" />
+            <span class="font-plus-jakarta-sans text-sm font-bold text-[var(--color-void-black)]">Organisation</span>
+          </div>
+          <span id="pct-organisation" class="rounded-full bg-[var(--color-void-black)] px-3 py-1 font-manrope text-xs font-semibold text-white">0%</span>
+        </div>
+        <div class="h-1.5 w-full rounded-full bg-[var(--color-void-black)]/10">
+          <div id="bar-organisation" class="h-1.5 rounded-full bg-[var(--color-nebula-blue-1)] transition-all" style="width: 0%"></div>
+        </div>
+      </a>
+
+      <!-- Santé -->
+      <a href="/home/sante" class="rounded-2xl border border-[var(--color-void-black)]/10 bg-white px-5 py-4 hover:border-[var(--color-nebula-blue-1)] transition-colors">
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center gap-2">
+            <img src="/icons/sante_icon.svg" alt="Santé" class="w-8 h-8" />
+            <span class="font-plus-jakarta-sans text-sm font-bold text-[var(--color-void-black)]">Santé</span>
+          </div>
+          <span id="pct-sante" class="rounded-full bg-[var(--color-void-black)] px-3 py-1 font-manrope text-xs font-semibold text-white">0%</span>
+        </div>
+        <div class="h-1.5 w-full rounded-full bg-[var(--color-void-black)]/10">
+          <div id="bar-sante" class="h-1.5 rounded-full bg-[var(--color-nebula-blue-1)] transition-all" style="width: 0%"></div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+</Layout>
+
+<script>
+  import PocketBase from 'pocketbase';
+
+  const pb = new PocketBase('http://127.0.0.1:8090');
+
+  if (!pb.authStore.isValid) {
+    window.location.href = '/connexion';
+  }
+
+  await pb.collection('users').authRefresh();
+
+  const user = pb.authStore.record;
+
+  const total =
+    (user.avancee_logement      ?? 0) +
+    (user.avancee_budget        ?? 0) +
+    (user.avancee_administratif ?? 0) +
+    (user.avancee_organisation  ?? 0) +
+    (user.avancee_sante         ?? 0);
+
+  document.getElementById('progression').textContent = `Progression ${Math.round((total / 100) * 100)}%`;
+
+  function setCard(key, valeur) {
+    const pct = (valeur ?? 0) * 5;
+    document.getElementById(`pct-${key}`).textContent = `${pct}%`;
+    const bar = document.getElementById(`bar-${key}`);
+    bar.style.width = `${pct}%`;
+    if (pct === 100) {
+      bar.style.backgroundColor = '#F5A623';
+    }
+  }
+
+  setCard('logement',       user.avancee_logement);
+  setCard('budget',         user.avancee_budget);
+  setCard('administration', user.avancee_administratif);
+  setCard('organisation',   user.avancee_organisation);
+  setCard('sante',          user.avancee_sante);
+
+  // Quiz journalier
+  const aujourd_hui = new Date().toISOString().split('T')[0];
+
+  const participation = await pb.collection('quizjournalier_participation')
+    .getFirstListItem(`utilisateur = "${user.id}"`)
+    .catch(() => null);
+
+  const dejaFait = participation && participation.derniere_participation.startsWith(aujourd_hui);
+
+  // Prochain reroll à 6h le lendemain
+  const maintenant = new Date();
+  const prochainReroll = new Date();
+  prochainReroll.setDate(maintenant.getDate() + 1);
+  prochainReroll.setHours(6, 0, 0, 0);
+  const diff = prochainReroll - maintenant;
+  const heures = Math.floor(diff / 1000 / 60 / 60);
+  const minutes = Math.floor((diff / 1000 / 60) % 60);
+  const countdown = `${heures}h${minutes.toString().padStart(2, '0')}`;
+
+  const statut = document.getElementById('quiz-statut');
+  const badge = document.getElementById('quiz-badge');
+  const card = document.getElementById('quiz-card');
+
+  if (dejaFait) {
+    statut.textContent = `Déjà complété · prochain dans ${countdown}`;
+    badge.textContent = '✓ Fait';
+    badge.style.backgroundColor = '#F5A623';
+    card.style.pointerEvents = 'none';
+    card.style.opacity = '0.6';
+  } else {
+    statut.textContent = 'Nouveau quiz disponible !';
+  }
+</script>

@@ -1,0 +1,90 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout titre="Mon espace">
+
+  <div class="px-6 pt-10 mb-16">
+
+    <!-- Titre + illustration -->
+    <div class="relative mb-10 overflow-hidden">
+      <h1 class="font-plus-jakarta-sans text-2xl font-bold text-[var(--color-void-black)]">Mon espace</h1>
+      <div class="absolute -top-4 -right-10 w-48 h-48 opacity-30 pointer-events-none">
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 100 Q60 20 110 100 Q160 180 200 100" stroke="#4F6EF7" stroke-width="8" fill="none" stroke-linecap="round"/>
+          <path d="M0 120 Q50 40 100 120 Q150 200 200 120" stroke="#4F6EF7" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.5"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Informations utilisateur -->
+    <section class="mb-8">
+      <h2 class="font-plus-jakarta-sans text-lg font-bold text-[var(--color-void-black)] mb-3">Informations utilisateur</h2>
+      <div class="rounded-2xl border border-gray-200 bg-white px-5 py-4">
+        <p id="nom-complet" class="font-plus-jakarta-sans text-base font-bold text-[var(--color-void-black)]">—</p>
+        <p id="email-user" class="font-manrope text-sm text-[var(--color-void-black)]/50 mt-1">—</p>
+      </div>
+    </section>
+
+    <!-- Paramètres -->
+    <section class="mb-8">
+      <h2 class="font-plus-jakarta-sans text-lg font-bold text-[var(--color-void-black)] mb-3">Paramètres</h2>
+      <div class="flex flex-wrap gap-2">
+        <a href="/home/edit" class="rounded-lg border border-gray-200 bg-white px-4 py-2 font-manrope text-sm text-[var(--color-void-black)] hover:border-blue-400 transition-colors">
+          Modifier mes informations
+        </a>
+      </div>
+    </section>
+
+    <!-- Actions -->
+    <div class="flex flex-col gap-3 mt-10">
+      <button
+        id="btn-deconnexion"
+        class="w-full rounded-full bg-[#F5A623] px-6 py-3.5 font-plus-jakarta-sans text-sm font-bold uppercase tracking-widest text-white hover:opacity-80 transition-opacity"
+      >
+        Se déconnecter
+      </button>
+      <button
+        id="btn-supprimer"
+        class="w-full rounded-full border border-red-300 bg-white px-6 py-3.5 font-plus-jakarta-sans text-sm font-bold uppercase tracking-widest text-red-400 hover:bg-red-50 transition-colors"
+      >
+        Supprimer le compte
+      </button>
+    </div>
+
+  </div>
+
+</Layout>
+
+<script>
+  import PocketBase from 'pocketbase';
+
+  const pb = new PocketBase('http://127.0.0.1:8090');
+
+  if (!pb.authStore.isValid) {
+    window.location.href = '/connexion';
+  }
+
+  await pb.collection('users').authRefresh();
+
+  const user = pb.authStore.record;
+
+  document.getElementById('nom-complet').textContent = `${user.prenom ?? ''} ${user.nom ?? ''}`.trim();
+  document.getElementById('email-user').textContent = user.email ?? '';
+
+  // Déconnexion
+  document.getElementById('btn-deconnexion').addEventListener('click', () => {
+    pb.authStore.clear();
+    window.location.href = '/connexion';
+  });
+
+  // Suppression du compte
+  document.getElementById('btn-supprimer').addEventListener('click', async () => {
+    const confirme = confirm('Es-tu sûr de vouloir supprimer ton compte ? Cette action est irréversible.');
+    if (!confirme) return;
+
+    await pb.collection('users').delete(user.id);
+    pb.authStore.clear();
+    window.location.href = '/connexion';
+  });
+</script>

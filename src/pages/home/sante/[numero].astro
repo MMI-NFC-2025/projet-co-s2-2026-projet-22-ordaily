@@ -1,0 +1,100 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+
+const { numero } = Astro.params;
+---
+
+<Layout titre="Santé - Cours">
+
+  <div class="px-6 pt-10 mb-16">
+
+    <!-- Titre -->
+    <h1 id="titre-cours" class="font-plus-jakarta-sans text-2xl font-bold text-[var(--color-void-black)] mb-8">
+      Chargement...
+    </h1>
+
+    <!-- Contenu du cours -->
+    <div id="contenu-cours" class="flex flex-col gap-5 mb-12">
+      <p id="p1" class="font-manrope text-sm text-[var(--color-void-black)]/70 leading-relaxed"></p>
+      <p id="p2" class="font-manrope text-sm text-[var(--color-void-black)]/70 leading-relaxed"></p>
+      <p id="p3" class="font-manrope text-sm text-[var(--color-void-black)]/70 leading-relaxed"></p>
+    </div>
+
+    <!-- Question -->
+    <div id="bloc-question" class="rounded-2xl border border-gray-200 bg-white px-5 py-6 flex flex-col gap-5">
+      <p id="question" class="font-plus-jakarta-sans text-sm font-bold text-[var(--color-void-black)]"></p>
+
+      <div class="flex flex-col gap-3">
+        <button id="btn-a" class="w-full rounded-full border border-gray-200 bg-gray-50 px-5 py-3.5 font-manrope text-sm text-[var(--color-void-black)] hover:border-blue-400 transition-colors text-left"></button>
+        <button id="btn-b" class="w-full rounded-full border border-gray-200 bg-gray-50 px-5 py-3.5 font-manrope text-sm text-[var(--color-void-black)] hover:border-blue-400 transition-colors text-left"></button>
+      </div>
+
+      <!-- Feedback -->
+      <p id="feedback" class="hidden text-center text-sm font-manrope font-semibold"></p>
+    </div>
+
+  </div>
+
+</Layout>
+
+<script>
+  import PocketBase from 'pocketbase';
+
+  const pb = new PocketBase('http://127.0.0.1:8090');
+
+  if (!pb.authStore.isValid) {
+    window.location.href = '/connexion';
+  }
+
+  await pb.collection('users').authRefresh();
+
+  const user = pb.authStore.record;
+  const avancee = user.avancee_sante ?? 0;
+  const numero = parseInt(window.location.pathname.split('/').pop());
+
+  const cours = await pb.collection('cours_sante').getFirstListItem(`numero=${numero}`);
+
+  document.getElementById('titre-cours').textContent = `${cours.numero} - ${cours.titre}`;
+  document.getElementById('p1').textContent = cours.paragraphe_1;
+  document.getElementById('p2').textContent = cours.paragraphe_2;
+  document.getElementById('p3').textContent = cours.paragraphe_3;
+
+  const feedback = document.getElementById('feedback');
+
+  if (numero > avancee) {
+    const question = await pb.collection('question_sante').getFirstListItem(`numero=${numero}`);
+
+    document.getElementById('question').textContent = question.question;
+    document.getElementById('btn-a').textContent = question.reponse_a;
+    document.getElementById('btn-b').textContent = question.reponse_b;
+
+    async function repondre(choix) {
+      document.getElementById('btn-a').disabled = true;
+      document.getElementById('btn-b').disabled = true;
+
+      if (choix === question.reponse_juste) {
+        await pb.collection('users').update(user.id, {
+          avancee_sante: avancee + 1,
+        });
+
+        feedback.textContent = '✓ Bonne réponse !';
+        feedback.className = 'text-center text-sm font-manrope font-semibold text-green-500';
+        feedback.classList.remove('hidden');
+
+        setTimeout(() => { window.location.href = '/home/sante'; }, 1500);
+      } else {
+        feedback.textContent = '✗ Mauvaise réponse, réessaie !';
+        feedback.className = 'text-center text-sm font-manrope font-semibold text-red-500';
+        feedback.classList.remove('hidden');
+
+        setTimeout(() => { window.location.href = '/home/sante'; }, 1500);
+      }
+    }
+
+    document.getElementById('btn-a').addEventListener('click', () => repondre('reponse_a'));
+    document.getElementById('btn-b').addEventListener('click', () => repondre('reponse_b'));
+
+  } else {
+    document.getElementById('bloc-question').style.display = 'none';
+  }
+</script>
