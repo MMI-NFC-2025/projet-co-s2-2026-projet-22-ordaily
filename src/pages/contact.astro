@@ -6,86 +6,111 @@ import Layout from '../layouts/Layout_without_wave.astro';
 
   <div class="px-6 pt-10 mb-16">
 
-    <!-- Titre + illustration -->
     <h1 class="font-plus-jakarta-sans text-2xl font-bold text-[var(--color-void-black)] mb-8">Contact</h1>
 
-    <!-- Légende -->
-    <p class="font-manrope text-xs text-[var(--color-void-black)]/40 mb-6"><span class="text-red-400">*</span> Champs obligatoires</p>
+    <p class="font-manrope text-xs text-[var(--color-void-black)]/40 mb-6">
+      <span class="text-red-400" aria-hidden="true">*</span>
+      <span class="sr-only">Astérisque : </span>Champs obligatoires
+    </p>
 
-    <!-- Formulaire -->
-    <div class="flex flex-col gap-5">
+    <form class="flex flex-col gap-5" aria-label="Formulaire de contact" onsubmit="return false;">
 
       <!-- Prénom -->
       <div class="flex flex-col gap-1.5">
-        <label class="font-manrope text-xs font-semibold text-[var(--color-void-black)]/60">Prénom <span class="text-red-400">*</span></label>
+        <label for="prenom" class="font-manrope text-xs font-semibold text-[var(--color-void-black)]/60">
+          Prénom <span class="text-red-400" aria-hidden="true">*</span>
+        </label>
         <input
           id="prenom"
           type="text"
           placeholder="ex : Lucas"
+          autocomplete="given-name"
+          aria-required="true"
+          aria-describedby="err-prenom"
           class="w-full rounded-full border border-[var(--color-void-black)]/20 bg-[var(--color-pure-white)] px-5 py-3.5 font-manrope text-sm text-[var(--color-void-black)] placeholder:text-[var(--color-void-black)]/40 outline-none focus:border-[var(--color-nebula-blue-1)] transition-colors"
         />
-        <p id="err-prenom" class="hidden font-manrope text-xs text-red-400 pl-2">Veuillez entrer votre prénom.</p>
+        <p id="err-prenom" class="hidden font-manrope text-xs text-red-400 pl-2" role="alert">Veuillez entrer votre prénom.</p>
       </div>
 
       <!-- Nom -->
       <div class="flex flex-col gap-1.5">
-        <label class="font-manrope text-xs font-semibold text-[var(--color-void-black)]/60">Nom <span class="text-red-400">*</span></label>
+        <label for="nom" class="font-manrope text-xs font-semibold text-[var(--color-void-black)]/60">
+          Nom <span class="text-red-400" aria-hidden="true">*</span>
+        </label>
         <input
           id="nom"
           type="text"
           placeholder="ex : Martin"
+          autocomplete="family-name"
+          aria-required="true"
+          aria-describedby="err-nom"
           class="w-full rounded-full border border-[var(--color-void-black)]/20 bg-[var(--color-pure-white)] px-5 py-3.5 font-manrope text-sm text-[var(--color-void-black)] placeholder:text-[var(--color-void-black)]/40 outline-none focus:border-[var(--color-nebula-blue-1)] transition-colors"
         />
-        <p id="err-nom" class="hidden font-manrope text-xs text-red-400 pl-2">Veuillez entrer votre nom.</p>
+        <p id="err-nom" class="hidden font-manrope text-xs text-red-400 pl-2" role="alert">Veuillez entrer votre nom.</p>
       </div>
 
       <!-- Mail -->
       <div class="flex flex-col gap-1.5">
-        <label class="font-manrope text-xs font-semibold text-[var(--color-void-black)]/60">Adresse email <span class="text-red-400">*</span></label>
+        <label for="mail" class="font-manrope text-xs font-semibold text-[var(--color-void-black)]/60">
+          Adresse email <span class="text-red-400" aria-hidden="true">*</span>
+        </label>
         <input
           id="mail"
           type="email"
           placeholder="ex : lucas.martin@email.com"
+          autocomplete="email"
+          aria-required="true"
+          aria-describedby="err-mail"
           class="w-full rounded-full border border-[var(--color-void-black)]/20 bg-[var(--color-pure-white)] px-5 py-3.5 font-manrope text-sm text-[var(--color-void-black)] placeholder:text-[var(--color-void-black)]/40 outline-none focus:border-[var(--color-nebula-blue-1)] transition-colors"
         />
-        <p id="err-mail" class="hidden font-manrope text-xs text-red-400 pl-2">Veuillez entrer une adresse email valide.</p>
+        <p id="err-mail" class="hidden font-manrope text-xs text-red-400 pl-2" role="alert">Veuillez entrer une adresse email valide.</p>
       </div>
 
       <!-- Objet -->
       <div class="flex flex-col gap-1.5">
-        <label class="font-manrope text-xs font-semibold text-[var(--color-void-black)]/60">Objet <span class="text-red-400">*</span></label>
+        <label for="objet" class="font-manrope text-xs font-semibold text-[var(--color-void-black)]/60">
+          Objet <span class="text-red-400" aria-hidden="true">*</span>
+        </label>
         <input
           id="objet"
           type="text"
           placeholder="ex : Question sur le logement"
+          autocomplete="off"
+          aria-required="true"
+          aria-describedby="err-objet"
           class="w-full rounded-full border border-[var(--color-void-black)]/20 bg-[var(--color-pure-white)] px-5 py-3.5 font-manrope text-sm text-[var(--color-void-black)] placeholder:text-[var(--color-void-black)]/40 outline-none focus:border-[var(--color-nebula-blue-1)] transition-colors"
         />
-        <p id="err-objet" class="hidden font-manrope text-xs text-red-400 pl-2">Veuillez entrer un objet.</p>
+        <p id="err-objet" class="hidden font-manrope text-xs text-red-400 pl-2" role="alert">Veuillez entrer un objet.</p>
       </div>
 
       <!-- Message -->
       <div class="flex flex-col gap-1.5">
-        <label class="font-manrope text-xs font-semibold text-[var(--color-void-black)]/60">Message <span class="text-red-400">*</span></label>
+        <label for="message" class="font-manrope text-xs font-semibold text-[var(--color-void-black)]/60">
+          Message <span class="text-red-400" aria-hidden="true">*</span>
+        </label>
         <textarea
           id="message"
           placeholder="ex : Bonjour, j'aurais une question concernant..."
           rows="6"
+          aria-required="true"
+          aria-describedby="err-message"
           class="w-full rounded-2xl border border-[var(--color-void-black)]/20 bg-[var(--color-pure-white)] px-5 py-4 font-manrope text-sm text-[var(--color-void-black)] placeholder:text-[var(--color-void-black)]/40 outline-none focus:border-[var(--color-nebula-blue-1)] transition-colors resize-none"
         ></textarea>
-        <p id="err-message" class="hidden font-manrope text-xs text-red-400 pl-2">Veuillez entrer un message.</p>
+        <p id="err-message" class="hidden font-manrope text-xs text-red-400 pl-2" role="alert">Veuillez entrer un message.</p>
       </div>
 
-      <p id="feedback" class="hidden text-center text-sm font-manrope font-semibold"></p>
+      <p id="feedback" class="hidden text-center text-sm font-manrope font-semibold" role="status" aria-live="polite"></p>
 
       <button
         id="btn-envoyer"
-        type="button"
+        type="submit"
+        aria-label="Envoyer le formulaire de contact"
         class="w-full rounded-full bg-[#F5A623] px-6 py-3.5 font-plus-jakarta-sans text-sm font-bold uppercase tracking-widest text-white hover:opacity-80 transition-opacity disabled:opacity-40 mt-2"
       >
         Envoyer
       </button>
 
-    </div>
+    </form>
 
   </div>
 
@@ -104,12 +129,14 @@ import Layout from '../layouts/Layout_without_wave.astro';
   function resetErrors() {
     champs.forEach(id => {
       document.getElementById(`err-${id}`).classList.add('hidden');
+      document.getElementById(id).removeAttribute('aria-invalid');
       document.getElementById(id).style.borderColor = '';
     });
   }
 
   function showError(id) {
     document.getElementById(`err-${id}`).classList.remove('hidden');
+    document.getElementById(id).setAttribute('aria-invalid', 'true');
     document.getElementById(id).style.borderColor = '#f87171';
   }
 
@@ -135,6 +162,7 @@ import Layout from '../layouts/Layout_without_wave.astro';
 
     btn.disabled = true;
     btn.textContent = 'Envoi...';
+    btn.setAttribute('aria-busy', 'true');
 
     try {
       await pb.collection('contactform').create({ prenom, nom, mail, objet, message });
@@ -153,5 +181,6 @@ import Layout from '../layouts/Layout_without_wave.astro';
 
     btn.disabled = false;
     btn.textContent = 'Envoyer';
+    btn.removeAttribute('aria-busy');
   });
 </script>
