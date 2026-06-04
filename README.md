@@ -4,9 +4,9 @@
 Éléménts à renseigner pour la soutenance :
 
 - [ ] Nom du projet : Ordaily
-- [ ] URL de la landing page :
-- [ ] URL de l'application finale :
-- [ ] URL de connexion au back office :
+- [ ] URL de la landing page : https://ordaily.nathan-batista-balanche.fr/
+- [ ] URL de l'application finale : https://ordaily.nathan-batista-balanche.fr/home/
+- [ ] URL de connexion au back office : https://pb-ordaily.nathan-batista-balanche.fr/_/
 - [ ] Identifiant de connexion au backoffice : admin@admin.com
 - [ ] Mot de passe de connexion au backoffice : admin1234
 - [ ] URL de la maquette FIGMA : https://www.figma.com/design/1FhyEm8whzD6GTnat0YbZA/ORDAILY?node-id=0-1&t=nqEXXMQzUVL5iMst-1
